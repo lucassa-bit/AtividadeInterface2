@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Roteiro I - Javascript Básico</title>
+    <link rel="stylesheet" href="src/css/mainPage.css">
+</head>
+
+<body>
+    <!--Topside-->
+    <header>
+        <div class="container">
+            Roteiro I - Javascript Básico
+        </div>
+    </header>
+
+    <main>
+        <!--midle side-->
+        <table>
+            <tr>
+                <td>
+                    <div class="text">
+                        <!--calcular o quadrado de todos os números (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 1</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>Todos da lista serão elevados ao quadrado:<br/></h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_1_Blank">
+                            <input type="button" value="Enter" onclick="firstQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_1"></p>
+                    </div>
+                </td>
+                <td>
+                    <div class="text">
+                        <!--achar o maior valor de uma lista de inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 2</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>O maior valor será retornado:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_2_Blank">
+                            <input type="button" value="Enter" onclick="secondQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_2"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="text">
+                        <!--achar o número de pessoas maiores e menores de 18 anos de uma lista de inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 3</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>Será contado quantos valores estão acima e igual, ou abaixo de 18 anos:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_3_Blank">
+                            <input type="button" value="Enter" onclick="thirdQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_3"></p>
+                    </div>
+                </td>
+                <td>
+                    <div class="text">
+                        <!--quebrar um data de um dado campo de entrada em dia, mês e ano, a partir do click de um botão-->
+                        <h1>Questão 4</h1>
+                        <h2>Digite a data que será analisada(separe por /)<br/>Será retornado o dia, mês e ano, da data recebida:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_4_Blank" required maxlength="10" minlength="5">
+                            <input type="button" value="Enter" onclick="forthQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_4"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="text">
+                        <!--inverter uma string de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 5</h1>
+                        <h2>Digite uma String que ela será invertida e retornada:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_5_Blank">
+                            <input type="button" value="Enter" onclick="fifthQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_5"></p>
+                    </div>
+                </td>
+                <td>
+                    <div class="text">
+                        <!--ordenar uma lista de inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 6</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>Todos os valores da lista serão ordenados em ordem crescente:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_6_Blank">
+                            <input type="button" value="Enter" onclick="sixthQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_6"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="text">
+                        <!--efetuar a soma de todos os números ímpares que são múltiplos de três e que se encontram dentro dos números inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 7</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>Serão somados todos os valores os multiplos de 3 e impares da lista:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_7_Blank">
+                            <input type="button" value="Enter" onclick="seventhQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_7"></p>
+                    </div>
+                </td>
+                <td>
+                    <div class="text">
+                        <!--efetuar o fatorial dos números que se encontram na lista de inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 8</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>Será feito uma fatorial de cada número na lista:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_8_Blank">
+                            <input type="button" value="Enter" onclick="eighthQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_8"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="text">
+                        <!--escrever a média aritmética dos valores lidos, a quantidade de valores positivos, a quantidade de valores negativos e o percentual de valores negativos e positivos na lista de inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 9</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>Será escrito a média, a quantidade de valores postivos e negativos, e seu percentual:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_9_Blank">
+                            <input type="button" value="Enter" onclick="ninthQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_9"></p>
+                    </div>
+                </td>
+                <td>
+                    <div class="text">
+                        <!-- inverter os valores (ex:[1, 5, 7, 2] fica [2, 7, 5, 1]) na lista de inteiros (separados por vírgula) de um dado campo de entrada, a partir do click de um botão-->
+                        <h1>Questão 10</h1>
+                        <h2>Digite a lista de valores(os separe por vírgula)<br/>será retornado a lista espelada:</h2>
+                        <form onsubmit="return false">
+                            <input type="text" id="question_10_Blank">
+                            <input type="button" value="Enter" onclick="tenthQuestion()">
+                        </form>
+                        <p class="printText" id="printSpace_10"></p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </main>
+
+    <!--Bottom side-->
+    <footer>
+        <div>My activity</div>
+        <div>Lucas Santos Andrade<br/></div>
+        <div class="f-nav">
+            Email: <a href="mailto:lucas.andrade@aluno.uepb.edu.br " id="link" onmouseenter="">lucas.andrade@aluno.uepb.edu.br</a>
+        </div>
+    </footer>
+
+    <script src="src/js/firstsQuestionsScript.js"></script>
+    <script src="src/js/secondsQuestionsScripts.js"></script>
+</body>
+
+</html>
+
+</html>
