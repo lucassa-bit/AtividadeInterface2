@@ -1,141 +1,174 @@
-function firstQuestion() {
-    var numberInput = String(document.getElementById("question_1_Blank").value);
-    var gettingArray = numberInput.split(",").map(Number);
-    var newString = new String("");
+function firstQuestion() { // OK!!!!
+    let arrayValue = [1, 60, 232, 7, 25, 76, 29, 74, 92];
+    let newString = new String("");
 
-    if (gettingArray.length > 0 && gettingArray[0] != "") {
-        try {
-            for (let index = 0; index < gettingArray.length; index++) {
-                const element = gettingArray[index];
-                if (!Number.isNaN(element)) {
-                    newString += "Valor " + (index + 1) + ": " + element + " => " + (element ** 2) + "<br>";
-                } else {
-                    throw TypeError;
-                }
-            }
-        } catch (err) {
-            newString = "Progama parou por " + err.name;
-        } finally {
-            document.getElementById("printSpace_1").innerHTML = newString;
+    try {
+        let filtrar = (array) => {
+            return array.filter(filterArray);
+        };
+
+        let $lista = processArrayFilter(arrayValue, filtrar);
+        let $somatorio = 0;
+
+        for (let valor of $lista) {
+            $somatorio += valor;
         }
+
+        newString += `A lista dos valores é: [${$lista}].<br>
+        A soma dos elementos da lista é: ${$somatorio}`;
+
+    } catch (e) {
+        newString = "Progama parou por " + err.name;
+    } finally {
+        document.getElementById("printSpace_1").innerHTML = newString;
     }
+}
+
+function processArrayFilter(gettingArray, callback) {
+    return callback(gettingArray);
+}
+
+function filterArray(value) {
+    return value > 60 && value < 300;
 }
 
 function secondQuestion() {
-    var numberInput = String(document.getElementById("question_2_Blank").value);
-    var gettingArray = numberInput.split(",").map(Number);
-    var biggest = new Number(gettingArray[0]);
-    var newString = new String(" ");
+    let nomeInput = String(document.getElementById("tipo_progressao").value);
+    let nVezes = String(document.getElementById("numero_vezes").value);
+    let a1Numero = String(document.getElementById("a1_valor").value);
+    let razao = String(document.getElementById("razao_valor").value);
 
-    if (gettingArray.length > 0 && gettingArray[0] != "") {
-        try {
-            for (let index = 1; index < gettingArray.length; index++) {
-                const element = gettingArray[index];
 
-                if (!Number.isNaN(element) && element > biggest) {
-                    let passPosition = index - 1;
-                    biggest = element;
-                } else if (Number.isNaN(element)) {
-                    throw TypeError;
-                }
-            }
-            newString += "Maior valor: " + biggest;
-        } catch (err) {
-            newString = "O resultado não foi dado por erro de " + err.name;
-        } finally {
-            document.getElementById("printSpace_2").innerHTML = newString;
-        }
+
+    let isAritmetica = nomeInput === "Aritmetica";
+
+    let paramProgressao = {
+        id: isAritmetica ? 0 : 1,
+        nome: nomeInput,
+        n: Number(nVezes),
+        a1: Number(a1Numero),
+        e: Number(razao)
+    };
+
+    if (isAritmetica) {
+        progressaoAritmetica(paramProgressao);
+    } else {
+        progressaoGeometrica(paramProgressao);
     }
 }
 
-function thirdQuestion() {
+function progressaoAritmetica(paramProgressao) {
+    let valores = new Array(paramProgressao.n);
+    let newString = new String("");
+
+    let index = 0;
+    while (index < paramProgressao.n) {
+        valores[index] = paramProgressao.a1 + index * paramProgressao.e;
+        index++;
+    }
+
+    let soma = ((valores[0] + valores[index - 1]) * paramProgressao.n) / 2
+    newString += `PA: [${valores}]<br> Soma valores: ${soma}`
+
+    document.getElementById("printSpace_2").innerHTML = newString;
+}
+
+function progressaoGeometrica(paramProgressao) {
+    let valores = new Array(paramProgressao.n);
+    let newString = new String("");
+
+    let index = 0;
+    while (index < paramProgressao.n) {
+        valores[index] = paramProgressao.a1 * Math.pow(paramProgressao.e, index);
+        index++;
+    }
+
+    let soma = (valores[0] * (Math.pow(paramProgressao.e, paramProgressao.n) - 1)) / (paramProgressao.e - 1);
+    newString += `PG: [${valores}]<br> Soma valores: ${soma}`
+
+    document.getElementById("printSpace_2").innerHTML = newString;
+}
+
+function thirdQuestion() { // JOAO 
     var numberInput = String(document.getElementById("question_3_Blank").value);
     var gettingArray = numberInput.split(",").map(Number);
-    var newString = new String("");
-    var bigger18 = new Number(0);
-    var lower18 = new Number(0);
-
-    if (gettingArray.length > 0 && gettingArray[0] != "") {
-        try {
-            for (let index = 0; index < gettingArray.length; index++) {
-                const element = gettingArray[index];
-
-                if (!Number.isNaN(element)) {
-                    if (element >= 18) {
-                        bigger18++;
-                    } else {
-                        lower18++;
-                    }
-                } else {
-                    throw TypeError;
-                }
-
-                newString = "Maior ou igual a 18 anos: " + bigger18 + " idades<br>Menor que 18 anos: " + lower18 + " idades";
-            }
-        } catch (err) {
-            newString = "O resultado não foi dado por erro de " + err.name;
-        } finally {
-            document.getElementById("printSpace_3").innerHTML = newString;
+    
+    var notaString = (media) => {
+        if (media < 5) {
+            return "Seu conceito é D";
+        } else if (media < 7) {
+            return "Seu conceito é C";
+        } else if (media < 9) {
+            return "Seu conceito é B";
+        } else {
+            return "Seu conceito é A";
         }
-    }
+    };
+
+    document.getElementById("printSpace_3").innerHTML = retornaConceito(gettingArray, notaString);
 }
 
-function forthQuestion() {
-    var numberInput = String(document.getElementById("question_4_Blank").value);
-    var gettingArray = numberInput.split(/[\s\./]+/);
-    var newString = new String("");
+function retornaConceito(arrayNotas, callbackFunction) {
+    let newString = new String("");
 
-    if (gettingArray.length > 0 && gettingArray[0] != "") {
-        try {
-            for (let index = 0; index < 3; index++) {
-                const element = Number(gettingArray[index]);
+    arrayNotas.forEach(element => {
+        newString += callbackFunction(element) + "<br>";
+    });
 
-                if (!Number.isNaN(element)) {
-                    switch (index) {
-                        case 0:
-                            {
-                                newString += "Dia: " + element;
-                                break;
-                            }
-                        case 1:
-                            {
-                                newString += "<br>Mês: " + element;
-                                break;
-                            }
-                        case 2:
-                            {
-                                newString += "<br>Ano: " + element;
-                                break;
-                            }
-                    }
-                } else {
-                    throw TypeError;
-                }
-
-            }
-        } catch (err) {
-            newString = "O resultado não foi dado por erro de " + err.name;
-        } finally {
-            document.getElementById("printSpace_4").innerHTML = newString;
-        }
-    }
+    return newString;
 }
 
-function fifthQuestion() {
-    var stringInput = String(document.getElementById("question_5_Blank").value);
-    var gettingArray = stringInput.split('');
-    var puttingArray = new Array(gettingArray.length);
-    var oldString = new String("String antiga: " + stringInput);
-    var newString = new String("String Nova: ");
+function forthQuestion() { // JOAO : OK
+    const valor = document.getElementById("question_4_Blank").value;
+    let newString = new String('');
 
-    if (gettingArray.length > 0 && gettingArray[0] != "") {
+    const notas = [100, 50, 20, 10, 5, 2];
+    const moedas = [1.0, 0.5, 0.25, 0.1, 0.05, 0.01];
 
-        for (let index = gettingArray.length; index > 0; index--) {
-            puttingArray[gettingArray.length - index] = gettingArray[index - 1];
-        }
-        puttingArray.forEach(element => {
-            newString += element;
-        });
-        document.getElementById("printSpace_5").innerHTML = oldString + "<br/>" + newString;
+    let n = parseFloat(valor);
+
+    newString += `valor: R$ ${n.toFixed(2)}`
+    newString += '<br>NOTAS:<br>';
+
+    notas.forEach(nota => {
+        newString += `${parseInt(n / nota)} nota(s) de R$ ${nota.toFixed(2)}<br>`;
+        n %= nota;
+    });
+
+    newString += '<br>MOEDAS:<br>';
+
+    moedas.forEach(moeda => {
+        newString += `${parseInt(n / moeda)} moeda(s) de R$ ${moeda.toFixed(2)}<br>`;
+        n = (n % moeda) + 0.00001;
+    });
+
+    document.getElementById("printSpace_4").innerHTML = newString;
+}
+
+function fifthQuestion() { //JOAO
+    let valorInicial = Number(document.getElementById("valorIncial").value);
+    let valorFinal = Number(document.getElementById("valorFinal").value);
+    let newString = new String("");
+
+    if(valorInicial > valorFinal) {
+        let save = valorInicial;
+        valorInicial = valorFinal;
+        valorFinal = save;
     }
+
+    let index = 0;
+    for (let initialValue = 0; initialValue <= valorFinal; initialValue++) {
+        if(numprimo(initialValue)) {
+            newString += initialValue < valorFinal ? initialValue + ", " : initialValue;
+            index++;
+        }
+    }
+
+    document.getElementById("printSpace_5").innerHTML = "Valores primos: [" + newString + "]";
+}
+
+function numprimo(num) {
+    for (var divisor = 2; divisor < num; divisor++) 
+    if (num % divisor == 0) return false;
+    return true;
 }

@@ -6,6 +6,9 @@ html {
     color: #FFFFFF;
 }
 
+.forms_number {
+}
+
 
 /*topside part*/
 
@@ -18,6 +21,9 @@ header {
 
 /*Middle side*/
 
+#questao2 {
+    overflow-y: auto;
+}
 .text {
     position: relative;
     background-color: #0A2140;
@@ -60,11 +66,14 @@ h1 {
     color: #A3A3FF;
 }
 
-h2 {
+h2,
+label {
     color: #DBDBFF;
     bottom: 24px;
     font-size: 15px;
 }
+
+label {}
 
 form {
     position: absolute;
@@ -72,14 +81,21 @@ form {
     bottom: 10px;
 }
 
+.forms_number input {
+    display: flex;
+    width: 25%;
+    overflow: auto;
+}
+
 
 /*Donwside part*/
 
 footer {
     background: #0A2140;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 15px;
     display: flex;
+    flex-direction: column;
 }
 
 .f-nav {
